@@ -102,7 +102,6 @@ export default function Dashboard() {
         ))}
       </div>
 
-      {/* streak */}
       <div className="relative overflow-hidden bg-[#3f5f4c] rounded-[2rem] p-7 text-[#f5f7f1] shadow-[0_16px_40px_rgba(63,95,76,0.18)]">
         <div className="absolute -right-10 -top-16 w-44 h-44 rounded-full border-[18px] border-white/10" />
         <div className="flex items-center gap-3 mb-4">
