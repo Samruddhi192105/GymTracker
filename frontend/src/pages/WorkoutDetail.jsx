@@ -22,7 +22,6 @@ export default function WorkoutDetail() {
   const [editForm, setEditForm] = useState({ weight: '', reps: '' })
 
   const fetchData = async () => {
-    // Workout
     const { data: w, error: wErr } = await supabase
       .from('workouts')
       .select('*')
@@ -34,7 +33,6 @@ export default function WorkoutDetail() {
     }
     setWorkout(w)
 
-    // Sets with exercise info
     const { data: s } = await supabase
       .from('workout_sets')
       .select(`
@@ -45,7 +43,6 @@ export default function WorkoutDetail() {
       .order('created_at')
     setSets(s || [])
 
-    // All user exercises for adding
     const { data: ex } = await supabase
       .from('exercises')
       .select('*')
@@ -59,7 +56,6 @@ export default function WorkoutDetail() {
     fetchData()
   }, [id])
 
-  // Group sets by exercise
   const grouped = {}
   sets.forEach((s) => {
     const eid = s.exercise_id
@@ -172,8 +168,7 @@ export default function WorkoutDetail() {
           {format(new Date(workout.workout_date), 'dd MMMM yyyy')}
         </p>
       </div>
-
-      {/* Exercises in this workout */}
+      
       <div className="space-y-6">
         {pendingExercises.map((exercise) => (
           <div key={exercise.id} className="bg-white rounded-xl border border-dashed border-primary-200 overflow-hidden">
@@ -240,7 +235,6 @@ export default function WorkoutDetail() {
             </div>
 
             <div className="p-4">
-              {/* Sets table */}
               <table className="w-full text-sm mb-3">
                 <thead>
                   <tr className="text-gray-500 text-left">
@@ -308,7 +302,6 @@ export default function WorkoutDetail() {
                 </tbody>
               </table>
 
-              {/* Add set form */}
               <div className="flex items-center gap-2 pt-2 border-t border-gray-100">
                 <input
                   type="number"
@@ -338,7 +331,6 @@ export default function WorkoutDetail() {
         ))}
       </div>
 
-      {/* Add Exercise Button */}
       <button
         onClick={() => setShowAddExercise(true)}
         className="mt-6 flex items-center gap-2 px-4 py-2.5 border-2 border-dashed border-gray-300 rounded-xl text-gray-500 hover:border-primary-400 hover:text-primary-600 transition w-full justify-center"
@@ -347,7 +339,6 @@ export default function WorkoutDetail() {
         Add Exercise to Workout
       </button>
 
-      {/* Add Exercise Modal */}
       {showAddExercise && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
           <div className="bg-white rounded-xl shadow-xl w-full max-w-md">
