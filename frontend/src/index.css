@@ -62,7 +62,6 @@ input:focus, select:focus {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
