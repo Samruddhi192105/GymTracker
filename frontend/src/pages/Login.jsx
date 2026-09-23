@@ -27,18 +27,19 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-blue-100 px-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
+    <div className="min-h-screen flex items-center justify-center px-4 py-10 bg-[#f7f8f4]">
+      <div className="w-full max-w-md bg-white/80 border border-[#e1e8e0] rounded-[2rem] shadow-[0_20px_60px_rgba(72,92,78,0.1)] p-8 md:p-10">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 bg-primary-100 rounded-full mb-4">
-            <Dumbbell className="w-7 h-7 text-primary-600" />
+          <div className="inline-flex items-center justify-center w-14 h-14 bg-[#dcebdd] rounded-2xl mb-5 rotate-3">
+            <Dumbbell className="w-7 h-7 text-[#4f745a] -rotate-3" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900">Welcome back</h1>
-          <p className="text-gray-500 mt-1">sign in to continue</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-[#8a9b8d] mb-2">gym tracker</p>
+          <h1 className="text-3xl font-bold text-[#293b32]">Welcome back</h1>
+          <p className="text-[#718077] mt-2">Pick up where your last session left off.</p>
         </div>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-50 text-red-700 text-sm rounded-lg">
+          <div className="mb-4 p-3 bg-[#f6e9e7] text-[#a66b68] text-sm rounded-xl border border-[#efd8d5]">
             {error}
           </div>
         )}
@@ -72,13 +73,13 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2.5 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 disabled:opacity-50"
+              className="w-full py-3 bg-[#496954] text-white font-medium rounded-xl hover:bg-[#3b5544] disabled:opacity-50 shadow-[0_8px_18px_rgba(73,105,84,0.18)]"
           >
             {loading ? 'signing in...' : 'Sign In'}
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-gray-500">
+        <p className="mt-6 text-center text-sm text-[#718077]">
           dont have an account?{' '}
           <Link to="/register" className="text-primary-600 font-medium hover:underline">
             sign up

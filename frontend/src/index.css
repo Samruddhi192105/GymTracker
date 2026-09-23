@@ -1,9 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  font-family: 'DM Sans', 'Avenir Next', sans-serif;
+  color: #26332f;
+  background: #f7f8f4;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
 body {
-  @apply bg-gray-50 text-gray-900 antialiased;
+  @apply antialiased;
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(214, 232, 220, 0.65), transparent 28rem),
+    radial-gradient(circle at 92% 92%, rgba(242, 224, 202, 0.55), transparent 26rem),
+    #f7f8f4;
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+button, input, select {
+  font: inherit;
+}
+
+button {
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+button:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+input, select {
+  background-color: rgba(255, 255, 255, 0.78);
+  border-color: #d9e0d9 !important;
+}
+
+input:focus, select:focus {
+  border-color: #8cac98 !important;
+  box-shadow: 0 0 0 3px rgba(140, 172, 152, 0.18);
+}
+
+::selection {
+  color: #20332a;
+  background: #cfe2d3;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Custom scrollbar */
@@ -12,11 +68,12 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100;
+  background: #eef1ec;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 rounded-full;
+  background: #c7d3c9;
+  border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-400;
+  background: #aabcae;
 }
