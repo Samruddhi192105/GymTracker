@@ -102,7 +102,6 @@ export default function Progress() {
         <p className="text-gray-500 mt-1">Compare performance and track personal records</p>
       </div>
 
-      {/* Exercise Selector */}
       <div className="mb-6">
         <label className="block text-sm font-medium text-gray-700 mb-1">Select Exercise</label>
         <select
@@ -133,7 +132,6 @@ export default function Progress() {
 
       {progress && !loading && (
         <div className="space-y-6">
-          {/* Indicator */}
           {progress.indicator && (
             <div className="flex items-center gap-3">
               <span className="text-sm text-gray-500">Compared to previous session:</span>
@@ -141,7 +139,6 @@ export default function Progress() {
             </div>
           )}
 
-          {/* Stats row */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="bg-white rounded-xl border border-gray-200 p-5 flex items-center gap-4">
               <div className="p-3 bg-blue-50 rounded-lg">
@@ -172,7 +169,6 @@ export default function Progress() {
             </div>
           </div>
 
-          {/* Previous vs Current */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <SessionCard title="Previous Session" session={progress.previous} />
             <SessionCard title="Current Session" session={progress.current} />

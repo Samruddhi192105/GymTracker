@@ -30,7 +30,6 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen flex">
-      {/* Sidebar - Desktop */}
       <aside className="hidden md:flex md:flex-col w-64 bg-[#f1f4ef]/90 border-r border-[#dfe7df]">
         <div className="p-6 border-b border-[#dfe7df]">
           <h1 className="text-xl font-bold text-[#3f5f4c] flex items-center gap-2">
@@ -74,7 +73,6 @@ export default function Layout() {
         </div>
       </aside>
 
-      {/* Mobile header */}
       <div className="md:hidden fixed top-0 left-0 right-0 z-40 bg-[#f1f4ef] border-b border-[#dfe7df] px-4 py-3 flex items-center justify-between">
         <h1 className="text-lg font-bold text-[#3f5f4c] flex items-center gap-2">
           <Dumbbell className="w-5 h-5" />
@@ -85,7 +83,6 @@ export default function Layout() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden fixed inset-0 z-30 bg-black/50" onClick={() => setMobileOpen(false)}>
           <div className="absolute top-14 left-0 right-0 bg-[#f1f4ef] border-b border-[#dfe7df] p-4 space-y-1" onClick={e => e.stopPropagation()}>
@@ -116,7 +113,6 @@ export default function Layout() {
         </div>
       )}
 
-      {/* Main content */}
       <main className="flex-1 md:ml-0 pt-16 md:pt-0 overflow-auto">
         <div className="max-w-6xl mx-auto p-4 md:p-10">
           <Outlet />
