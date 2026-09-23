@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext'
 import { ArrowLeft, Plus, Trash2, Pencil, X, Check } from 'lucide-react'
 import { format } from 'date-fns'
 
-export default function WorkoutDetail() {
+export default function WorkoutDetail() { 
   const { id } = useParams()
   const navigate = useNavigate()
   const { user } = useAuth()
