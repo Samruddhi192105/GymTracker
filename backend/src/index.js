@@ -25,7 +25,6 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Validate the bearer token and attach a user-scoped Supabase client.
 async function auth(req, res, next) {
   const header = req.headers.authorization;
   if (!header || !header.startsWith('Bearer ')) {
@@ -40,8 +39,6 @@ async function auth(req, res, next) {
       return res.status(401).json({ error: 'invalid token' });
     }
     req.user = user;
-    req.token = token;
-    // Create a client that includes the current user's JWT for row-level access.
     req.supabase = createClient(supabaseUrl, supabaseAnonKey, {
       global: { headers: { Authorization: `Bearer ${token}` } }
     });
@@ -55,17 +52,14 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', time: new Date().toISOString() });
 });
 
-// Calculate the main dashboard metrics for the logged-in user.
 app.get('/api/dashboard', auth, async (req, res) => {
   const sb = req.supabase;
   const uid = req.user.id;
 
-  // Total workouts recorded by the current user.
   const { count: totalWorkouts } = await sb
     .from('workouts')
     .select('*', { count: 'exact', head: true });
 
-  // Aggregate exercise volume and count unique movements for the current user.
   const { data: sets } = await sb
     .from('workout_sets')
     .select('exercise_id, weight, reps, workouts!inner(user_id)')
@@ -81,7 +75,6 @@ app.get('/api/dashboard', auth, async (req, res) => {
     }
   }
 
-  // Count workouts that fall in the current week, starting on Sunday.
   const now = new Date();
   const startOfWeek = new Date(now);
   startOfWeek.setDate(now.getDate() - now.getDay());
@@ -92,7 +85,6 @@ app.get('/api/dashboard', auth, async (req, res) => {
     .select('*', { count: 'exact', head: true })
     .gte('workout_date', startOfWeek.toISOString().split('T')[0]);
 
-  // Check activity dates to calculate current and longest training streaks.
   const { data: dates } = await sb
     .from('workouts')
     .select('workout_date')
@@ -127,7 +119,6 @@ app.get('/api/dashboard', auth, async (req, res) => {
       }
     }
 
-    // Calculate the longest consecutive run of workout days.
     let temp = 1;
     longestStreak = 1;
     for (let i = 1; i < uniqueDates.length; i++) {
@@ -155,7 +146,6 @@ app.get('/api/dashboard', auth, async (req, res) => {
   });
 });
 
-// Review recent workouts for a selected exercise and summarize the latest trend.
 app.get('/api/progress/:exerciseId', auth, async (req, res) => {
   const { exerciseId } = req.params;
   const sb = req.supabase;
@@ -184,7 +174,6 @@ app.get('/api/progress/:exerciseId', auth, async (req, res) => {
     });
   }
 
-  // group by workout
   const byWorkout = {};
   for (const s of sets) {
     if (!byWorkout[s.workout_id]) {
@@ -220,7 +209,6 @@ app.get('/api/progress/:exerciseId', auth, async (req, res) => {
     if (oneRM > max1rm) max1rm = oneRM;
   }
 
-  // compare current vs previous using estimated 1rm of best set
   let indicator = null;
   if (current && previous) {
     const currBest = Math.max(...current.sets.map(s => s.weight * (1 + s.reps / 30)));
@@ -240,7 +228,6 @@ app.get('/api/progress/:exerciseId', auth, async (req, res) => {
   });
 });
 
-// just streak
 app.get('/api/streak', auth, async (req, res) => {
   const sb = req.supabase;
 
